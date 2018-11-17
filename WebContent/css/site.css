@@ -1,0 +1,49 @@
+
+.container-fluid{
+	padding-right: 0;
+	padding-left: 0;	
+}
+.titulo-principal{
+	color:white;
+	width: 900px;
+	box-sizing: border-box;
+    order:  2;
+	text-align: center;
+	margin-left: 80px;
+	vertical-align: middle;
+}
+
+.titulo-principal h1{
+	font-size: 30px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.info-user{
+	height: 50px;
+ 	order:  4;
+}
+
+.carrinho-compras{
+	height: 50px;
+    order: 3;
+}
+
+.content{
+  background-color: red;
+  height: 30px;
+  order:  1;
+}
+
+.my-flex{
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	height: 86px;
+}
+
+.navbar{
+	margin-bottom: 0;
+	min-height: 0;
+}

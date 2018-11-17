@@ -1,0 +1,53 @@
+body{
+
+    background-color:#3d73b1;
+}
+
+html,
+body{
+
+    height: 100%;
+}
+
+header{
+    position: relative;
+}
+
+.form-login{
+    background-color: #FFF;
+    background-size:50% ; 
+    box-shadow: 0 0 5px #000;
+    box-sizing: border-box;
+    padding: 30px;
+    width: 230px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -20%); 
+}
+
+#titulo-principal{
+    color: #FFF;
+    font-size: 30px;
+    position: relative;
+}
+
+.banner-hidro{
+    width: 300px;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+}
+
+.erro-login{
+    color: red;
+    outline: 0;
+}
+
+
+
+/* .erro-login input {
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(255, 0, 0);
+} */
