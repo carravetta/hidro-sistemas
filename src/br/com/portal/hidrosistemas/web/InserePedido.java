@@ -27,7 +27,8 @@ public class InserePedido implements Tarefa {
 		HttpSession session = req.getSession();
 		Empresa usuario = (Empresa) session.getAttribute("usuarioLogado");
 		session.removeAttribute("itemInvalido");
-			
+		
+		
 		if (usuario != null) {
 
 			try (Connection con = new ConnectionPool().getConnetion()) {

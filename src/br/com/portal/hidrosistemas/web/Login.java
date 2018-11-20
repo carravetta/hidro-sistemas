@@ -12,18 +12,22 @@ public class Login implements Tarefa {
 	@Override
 	public String executa(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
-		String email = req.getParameter("e-mail");
-		String senha = req.getParameter("senha");
-
+		HttpSession session = req.getSession();
+		Empresa empresa = (Empresa) session.getAttribute("usuarioLogado");
+		
+		if(empresa != null)
+			return "/WEB-INF/paginas/pedidos.jsp";
+		
 		try (Connection con = new ConnectionPool().getConnetion()) {
+			String email = req.getParameter("e-mail");
+			String senha = req.getParameter("senha");
 			
-			Empresa empresa = new EmpresaDAO(con).buscaLogin(email, senha);
+			empresa = new EmpresaDAO(con).buscaLogin(email, senha);
 			
 			if (empresa != null) {
-				HttpSession session = req.getSession();
+				session = req.getSession();
 				session.setAttribute("usuarioLogado", empresa);
 				session.setMaxInactiveInterval(10*60);
-				System.out.println(empresa.isAdmin());
 				return "/WEB-INF/paginas/pedidos.jsp";
 
 			}

@@ -85,7 +85,7 @@
                     <a href="exec?tarefa=Perfil"><span class="glyphicon glyphicon-user"> </span> Perfil</a>
                </li>    
                <li>
-                   <a href="exec?tarefa=Historico"><span class="glyphicon glyphicon-list-alt">  </span> Histórico</a>
+                   <a href="exec?tarefa=Historico" class="historico-btn"><span class="glyphicon glyphicon-list-alt">  </span> Histórico</a>
                 </li>
                 <li>
                     <a href="#"><span class="glyphicon glyphicon-barcode">   </span> Boletos</a>
@@ -213,11 +213,14 @@
 											</td>
 										</tbody>
 									</table>
-								<!--   <span id="info-ped"></span>-->
+								    <span id="info-ped"></span>
 									<span id="head-ped"></span>
 									<span id="itens-ped"></span>
 									<button type="submit" class="btn btn-primary btn-md " id="envia-cot">Enviar</button>
-								</div>   
+								</div> 
+								<div class="text-center">  
+									<img src="/imagens/transparent-background-loading.gif" alt="carregando">
+								</div>
 							</div>
 						</div>
 					</div>			    
@@ -232,7 +235,6 @@
     <script src="js/pedidos.js"></script>
     <script src="js/main.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script src="bootstrap-4.1/js/bootstrap.min.js"></script>
     
 </body>
 

@@ -95,38 +95,47 @@
      <!-- Historico de pedidos -->   
     <section class="container">
     
-    <h3 class="titulo-pedidos">Historico Pedidos</h3>
-        <c:forEach var="h" items="${historicoPedido}" varStatus = "x">       
-            <c:if test = "${h.idPedido != historicoPedido[x.count].idPedido}">
-                <div class="panel panel-default button-collapse" aria-multiselectable="true" role="button" 
-                data-toggle="collapse" data-target=".pedido-collapse" aria-expanded="false" aria-controls="pedido-collapse">
-                    <div class="panel-heading text-center " >
-                        <strong >
-                            <span class="pull-left">Pedido: ${h.idPedido} </span> 
-                            Data:<fmt:formatDate value="${h.data}" pattern= "dd/MM/yyyy"/>  
-                            <span class="pull-right">Qnt</span>
-                        </strong>
-                    </div>
-                    <div class="collapse pedido-collapse">
-                        <div class="well">  
-                            <table class="table table-bordered table-striped table-responsive table-bordered">
-                                <tbody class="text-center">
-                                    <c:forEach var="h1" items="${historicoPedido}" varStatus = "y">
-                                        <c:if test = "${h1.idPedido == h.idPedido}">
-                                            <tr>
-                                                <td class = "codigo-item">${h1.codigo}</td>
-                                                <td>${h1.descricao}</td>
-                                                <td class = "qnt-item-historico">${h1.quantidade}</td>	
-                                            </tr>
-                                        </c:if>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>    
-                    </div>   
-                </div>     
+        <h3 class="titulo-pedidos">Historico Pedidos</h3>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <c:forEach var="h" items="${historicoPedido}" varStatus = "x">       
+                <c:if test = "${h.idPedido != historicoPedido[x.count].idPedido}">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="heading1"> 
+                           <div class="collapse-btn" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1"
+                                aria-expanded="true" aria-controls="collapse1">
+                                <strong >
+                                    <span class="pull-left">Pedido: ${h.idPedido} </span> 
+                                    <span class="pull-right">Qnt</span>
+                                    <div class="text-center">
+                                        <span>Data:<fmt:formatDate value="${h.data}" pattern= "dd/MM/yyyy"/></span>  
+                                    </div>
+                                </strong>
+                            </div>
+                        </div>
+
+                        <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
+                            <div class="panel-body"> 
+                                <table class="table table-bordered table-striped table-responsive table-bordered">
+                                    <tbody class="text-center">
+                                        <c:forEach var="h1" items="${historicoPedido}" varStatus = "y">
+                                            <c:if test = "${h1.idPedido == h.idPedido}">
+                                                <tr>
+                                                    <td class = "codigo-item">${h1.codigo}</td>
+                                                    <td>${h1.descricao}</td>
+                                                    <td class = "qnt-item-historico">${h1.quantidade}</td>	
+                                                </tr>
+                                            </c:if>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>       
                 </c:if>  
-        </c:forEach> 
+            </c:forEach>
+        </div> 
+            <!-- variaveis:  -->
+
 	 </section>
         
 	 <!-- Fim do Historico -->

@@ -40,17 +40,23 @@ $(function () {
 	
 	$('#envia-cot').one('click', function(){
 		$('#envia-cot').addClass('disabled');
-		$('#envia-cot').attr("aria-disabled", "true");
+        $('#envia-cot').attr("aria-disabled", "true");
+        $('#carregando').toggle();
 	});
 	
 	setInterval(function(){
 		$('#alerta-sucesso').alert('close')
-	}, 2000);
+	}, 3000);
     
     $('.button-collapse').click(function(){
       console.log("click");
-      
-        
+  
     })
+
+    $('.historico-btn').click(function(){
+        //buscar todos headins, aria-controls, e href
+        var collapseBtn = $('.panel-heading').find(".collapse.btn");
+
+    });
     
 });
