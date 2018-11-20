@@ -56,7 +56,6 @@ $(function () {
     $('.historico-btn').click(function(){
         //buscar todos headins, aria-controls, e href
         var collapseBtn = $('.panel-heading').find(".collapse.btn");
-
     });
     
 });

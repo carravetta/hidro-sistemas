@@ -101,6 +101,7 @@
                 <c:if test = "${h.idPedido != historicoPedido[x.count].idPedido}">
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="heading1"> 
+                            
                            <div class="collapse-btn" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse1"
                                 aria-expanded="true" aria-controls="collapse1">
                                 <strong >
