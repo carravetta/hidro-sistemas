@@ -1,0 +1,12 @@
+.sucesso img{
+    height: 300px;
+}
+
+.erro img{
+    height: 177px;
+    margin-top: 80px;
+}
+
+.hidden{
+    display: none;
+}

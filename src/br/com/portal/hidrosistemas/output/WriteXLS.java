@@ -7,13 +7,17 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-import br.com.portal.hidrosistemas.control.Empresa;
-import br.com.portal.hidrosistemas.web.InserePedido;
+import br.com.portal.hidrosistemas.model.Empresa;
+import br.com.portal.hidrosistemas.model.ItensPedido;
+import br.com.portal.hidrosistemas.model.Pedido;
+import br.com.portal.hidrosistemas.web.Principal;
 
 public class WriteXLS {
 	
@@ -23,15 +27,15 @@ public class WriteXLS {
 		this.workbook = new HSSFWorkbook();
 	}
 	
-	public void escrevePedidoXLS(Empresa cliente, String[] desc, String[] qnt, long numPed ) {
-		HSSFSheet sheetPedido = workbook.createSheet("PEDIDO" + numPed);
+	public void escrevePedidoXLS(Empresa cliente, List<ItensPedido> pedido, long idPedido ) {
+		HSSFSheet sheetPedido = workbook.createSheet("PEDIDO" + idPedido);
 		
 		int rownum = 0;
 		Row row = sheetPedido.createRow(rownum++);
 		int cellnum = 0;
 		
 		Cell razaoSocial = row.createCell(cellnum++);
-		razaoSocial.setCellValue("Raz„o Social: "+ cliente.getRazaoSocial());
+		razaoSocial.setCellValue("Raz√£o Social: "+ cliente.getRazaoSocial());
 		
 		Cell cnpj = row.createCell(cellnum++);
 		cnpj.setCellValue("CNPJ/CPF: "  + cliente.getCnpj_cpf());
@@ -71,7 +75,7 @@ public class WriteXLS {
 		cellnum = 0;
 		
 		Cell numPedido = row.createCell(cellnum++);
-		numPedido.setCellValue("PEDIDO: " + numPed);
+		numPedido.setCellValue("PEDIDO: " + idPedido);
 		
 		Cell data = row.createCell(cellnum++);
 		data.setCellValue("DATA: " + getDataAtual());
@@ -85,45 +89,40 @@ public class WriteXLS {
 		codItem.setCellValue("CODIGO");
 		
 		Cell item = row.createCell(cellnum++);
-		item.setCellValue("DESCRI«√O");
+		item.setCellValue("DESCRI√á√ÉO");
 		
 		Cell quant = row.createCell(cellnum++);
 		quant.setCellValue("QUANTIDADE");
 		
+		Cell unidade = row.createCell(cellnum++);
+		unidade.setCellValue("UNIDADE");
+		
 		rownum++; //pula linha dados pedido
 		row = sheetPedido.createRow(rownum);
 		
-		// montagem itens pedido
 		
-		for(int i = 0; i<desc.length; i++) {
+		for(ItensPedido items : pedido) {
 			cellnum = 0;
 			
-			if(qnt[i] != "" && desc[i] != "") {
+			Cell codigo = row.createCell(cellnum++);
+			codigo.setCellValue(items.getCodigo());
 			
-			String cod;
-			try {
-				cod = new InserePedido().getCodigoItem(desc[i]);
-				Cell codigo = row.createCell(cellnum++);
-				codigo.setCellValue(cod);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-				
 			Cell descricao = row.createCell(cellnum++);
-			descricao.setCellValue(desc[i]);
+			descricao.setCellValue(items.getDescricao());
 			
 			Cell quantidade = row.createCell(cellnum++);
-			quantidade.setCellValue(qnt[i]);
+			quantidade.setCellValue(items.getQuantidade());
+			
+			Cell unid = row.createCell(cellnum++);
+			 unid.setCellValue(items.getUnidade());
 			
 			
-			rownum++; 
-			row = sheetPedido.createRow(rownum);
-			}
 		}
+		
 		
 		try {
 			
-			FileOutputStream arquivoPedido = new FileOutputStream(new File("PEDIDO "+numPed+".xls"));
+			FileOutputStream arquivoPedido = new FileOutputStream(new File("PEDIDO "+idPedido+".xls"));
 			workbook.write(arquivoPedido);
 			arquivoPedido.close();
 			System.out.println("arquivo gerado");

@@ -10,52 +10,44 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
 import java.util.Date;
 
-import br.com.portal.hidrosistemas.control.Pedido;
+import javax.persistence.EntityManager;
 
+import br.com.portal.hidrosistemas.model.HistoricoPedido;
+import br.com.portal.hidrosistemas.model.Pedido;
+import br.com.portal.hidrosistemas.model.Produto;
+import br.com.portal.hidrosistemas.util.JPAUtil;
 
 public class PedidoDAO {
-	
+
 	private final Connection con;
 
 	public PedidoDAO(Connection con) {
 		this.con = con;
 	}
 
-	public long inserePedido(long empresa_idEmpresa) throws SQLException{
-		con.setAutoCommit(false);
-		String sql = "insert into pedido (data, empresa_idempresa) values(?, ?)";
+	public Pedido inserePedido(long empresa_idEmpresa) throws SQLException {
+		
 		Date data = new Date();
-		long idPedido = 0;
-		try(PreparedStatement stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-			
-			adiciona(data, empresa_idEmpresa, stmt);
-			ResultSet res = stmt.getGeneratedKeys();
-			while(res.next()) {
-			idPedido = res.getLong(1);
-			}
-			con.commit();
-			
-		}catch(SQLException e) {
-			e.printStackTrace();
-			con.rollback();
-		}
-		
-		return idPedido;
-	}
-	
-	public void adiciona(Date data, long empresa_idEmpresa, PreparedStatement stmt) throws SQLException{
-		
 		Calendar c = Calendar.getInstance();
-        data = c.getTime();
-        DateFormat formataData = DateFormat.getDateInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		data = c.getTime();
+		DateFormat formataData = DateFormat.getDateInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
-		stmt.setString(1, sdf.format(data));
-		stmt.setLong(2, empresa_idEmpresa);
-		stmt.execute();
-	}
+		Pedido pedido = new Pedido(data, empresa_idEmpresa);
+		
+		EntityManager em = new JPAUtil().getEntityManager();
+		
+		em.getTransaction().begin();;
+		
+		em.persist(pedido);
+		em.getTransaction().commit();
+		em.close();
+		
+		return pedido;
 	
+	}
+
+
 }

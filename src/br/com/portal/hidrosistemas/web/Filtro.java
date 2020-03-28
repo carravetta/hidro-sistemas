@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import br.com.portal.hidrosistemas.control.Empresa;
+import br.com.portal.hidrosistemas.model.Empresa;
 
 @WebFilter(urlPatterns = "/*")
 public class Filtro implements Filter{

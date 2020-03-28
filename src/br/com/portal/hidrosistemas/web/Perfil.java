@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import br.com.portal.hidrosistemas.control.Empresa;
 import br.com.portal.hidrosistemas.db.ConnectionPool;
+import br.com.portal.hidrosistemas.model.Empresa;
 
 public class Perfil implements Tarefa {
 
@@ -21,7 +21,7 @@ public class Perfil implements Tarefa {
 		try(Connection con = new ConnectionPool().getConnetion()){
 		
 			if(usuario != null) {
-				session.setMaxInactiveInterval(60);
+				session.setMaxInactiveInterval(60*10);
 				return "/WEB-INF/paginas/perfil.jsp";
 			}
 		

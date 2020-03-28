@@ -8,29 +8,36 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import br.com.portal.hidrosistemas.model.Empresa;
 
 
 @WebServlet(urlPatterns = "/exec")
-public class Controller extends HttpServlet{
-
+public class Controller extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
 		String tarefa = req.getParameter("tarefa");
-		if(tarefa == null) {
+		if (tarefa == null) {
 			throw new IllegalArgumentException("Voce esqueceu de passar a tarefa");
 		}
 		
-		try {
-			String nomeClasse = "br.com.portal.hidrosistemas.web." + tarefa;
-			Class<?> type = Class.forName(nomeClasse);
-			Tarefa instancia = (Tarefa) type.newInstance();
-			String pagina = instancia.executa(req, resp);
-			RequestDispatcher dispatcher = req.getServletContext().getRequestDispatcher(pagina);
-			dispatcher.forward(req, resp);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			try {
+				RequestDispatcher dispatcher;
+				
+				String nomeClasse = "br.com.portal.hidrosistemas.web." + tarefa;
+				Class<?> type = Class.forName(nomeClasse);
+				Tarefa instancia = (Tarefa) type.newInstance();
+				String pagina = instancia.executa(req, resp);
+				dispatcher = req.getRequestDispatcher(pagina);
+				dispatcher.forward(req, resp);		
+		
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 	}
 }
+

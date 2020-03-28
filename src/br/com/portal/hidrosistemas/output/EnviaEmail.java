@@ -2,12 +2,10 @@ package br.com.portal.hidrosistemas.output;
 
 import java.sql.Connection;
 
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
+
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
-import org.apache.commons.mail.SimpleEmail;
 
 public class EnviaEmail {
 
@@ -19,18 +17,6 @@ public class EnviaEmail {
 	
 	public void enviaEmailPedido(String destinatario, String msg, String assunto, long numPed) throws EmailException {
 		
-//		Email email = new SimpleEmail();
-//		email.setHostName("smtp.gmail.com");
-//		email.setSmtpPort(465);
-//		email.setDebug(true);
-//		email.setAuthentication("lscarravetta@gmail.com", "34785081");
-//		email.setSSLOnConnect(true);
-//		email.setFrom("lscarravetta@gmail.com", "Lucas Carravetta");
-//		email.setSubject(assunto);
-//		email.setMsg(msg);
-//		email.addTo(destinatario);
-//		email.send();
-		
 
 		  // Create the attachment
 		  EmailAttachment attachment = new EmailAttachment();
@@ -41,13 +27,13 @@ public class EnviaEmail {
 
 		  // Create the email message
 		  MultiPartEmail email = new MultiPartEmail();
-		  email.setHostName("smtp.gmail.com");
+		  email.setHostName("smtp.terra.com.br");
 		  email.setSmtpPort(465);
-		  email.setDebug(true);
-		  email.setAuthentication("lscarravetta@gmail.com", "34785081");
+		  email.setDebug(false);
+		  email.setAuthentication("lucas.carravetta@hidrosistemas.com", "cns1076sp");
 		  email.setSSLOnConnect(true);
 		  email.addTo(destinatario);
-		  email.setFrom("lscarravetta@gmail.com", "Lucas Carravetta");
+		  email.setFrom("lucas.carravetta@hidrosistemas.com", "Lucas Carravetta");
 		  email.setSubject(assunto);
 		  email.setMsg(msg);
 

@@ -1,3 +1,64 @@
+$(function () {
+
+	
+	// $(".jsonProdutos").focus(function(){
+	// 	chamaAutocomplete();
+	// });
+	
+
+    //Ação de adicionar linhas
+    $("#adicionar-linha").click(function(event){
+        event.preventDefault();
+        insereLinha();
+    });
+
+    $("#limpa-lista").click(function(event){
+        event.preventDefault();
+       limpaLista();
+    });
+
+    $("#gera-cot").on("click", function(event){
+    	
+    	$("#dados").html("");
+    	$("#dadosCli").html("");
+    	$("#info-ped").html("");
+    	$("#head-ped").html("");
+    	$("#itens-ped").html("");
+        event.preventDefault();
+        montaInfoPedido();
+        montaItensPedido();
+	}); 
+	  
+	
+	
+	$(".jsonProdutos").easyAutocomplete(autocompleteOptions());
+	//-----------------------
+	
+	
+		
+	//---------------------------------------------------------------
+    
+	$("input").on("change" , function(){
+		verificaInputs();
+	})
+	
+	$('#erro-itens').modal('show');
+	
+	$('#envia-cot').one('click', function(){
+		$('#envia-cot').addClass('disabled');
+        $('#envia-cot').attr("aria-disabled", "true");
+        $('#load').toggle();
+	});
+	
+	setInterval(function(){
+		$('#alerta-sucesso').alert('close')
+	}, 3000);
+        
+
+});
+
+
+
 function montaLinha(){ // botao adicionar linha
     var tr = $("<tr>");
     var tdItem = $("<td>");
@@ -23,44 +84,49 @@ function montaLinha(){ // botao adicionar linha
 function autocompleteOptions(){
 	var options = {
 
-	  		  url: "/hidro-sistemas/JSONProdutos.json",
-	  		  getValue: "descricao",
-	  		  template: {
-	  		        type: "description",
-	  		        fields: {
-	  		            description: "unidade"
-	  		        }
-	  		    },
-	  		    
-	  		  list: {	
-	  			  
-	  			maxNumberOfElements: 50,
-	  			showAnimation: {
-	  				type: "fade", 
-	  				time: 400,
-	  				callback: function() {}
-	  			},
-	  			hideAnimation: {
-	  				type: "slide", 
-	  				time: 400,
-	  				callback: function() {}
-	  			},
-	  		    match: {
-	  		      enabled: true
-	  		    }
-	  		  },
-	  		};
-
+		url: "/JSONProdutos.json",
+		getValue: "descricao",
+		template: {
+			type: "iconLeft",
+			fields: {
+				iconSrc: "link"
+			}				
+		},
+		
+		list: {	
+			
+		maxNumberOfElements: 50,
+		showAnimation: {
+			type: "fade", 
+			time: 400,
+			callback: function() {}
+		},
+		hideAnimation: {
+			type: "slide", 
+			time: 400,
+			callback: function() {}
+		},
+		match: {
+			enabled: true
+		}
+		},
+	};
+		
 	return options;
 }
+
+
 
 
 function insereLinha(){ // botao insere linhas
     var corpoTabela = $("#corpo-tabela");
     var linha = montaLinha();
         corpoTabela.append(linha);
-   $(".jsonProdutos").easyAutocomplete(autocompleteOptions());
-    
+		$(".jsonProdutos").focus(function(){
+			console.log("entrei no autocomplete de inserelinha");
+			
+			chamaAutocomplete();
+		});    
 }
 
 function limpaLista(){ // botao limpa lista
@@ -193,4 +259,3 @@ function verificaInputs(){
 	}
 }
 
-	

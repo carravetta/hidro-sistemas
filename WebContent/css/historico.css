@@ -9,3 +9,8 @@
 .panel{
 	border-bottom: 0;
 }
+
+.panel-body{
+	padding: 3px;
+	background-color: rgba(#3d73b1, #3d73b1, #3d73b1, 0.4); 
+}

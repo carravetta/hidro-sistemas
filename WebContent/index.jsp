@@ -17,7 +17,7 @@
 
 <body>
     <header>
-        <h1 id="titulo-principal" class="text-center">Portal de pedidos Hidro Sistemas</h1>
+        <h1 id="titulo-principal" class="text-center">Portal de Pedidos Hidro Sistemas</h1>
     </header>
 
    

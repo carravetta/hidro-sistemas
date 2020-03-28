@@ -5,8 +5,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.simple.JSONObject;
-import br.com.portal.hidrosistemas.control.Produto;
+
 import br.com.portal.hidrosistemas.db.ProdutoDAO;
+import br.com.portal.hidrosistemas.model.Produto;
 
 public class JsonWrite {
 
@@ -31,18 +32,22 @@ public class JsonWrite {
 			jobj.put("unidade", produtos.getUnidade());
 			json.add(jobj);
 			jobj.put("descricao", produtos.getDescricao());
-			//json.add(jobj);
+			jobj.put("fantasia", produtos.getFantasia());
+			jobj.put("link", produtos.getLink());
+
 		}
 	
 		writerFile = new FileWriter("../hidro-sistemas/WebContent/JSONProdutos.json");
+		writerFile.write("[");
+
 		for(JSONObject lista : json) {
 			writerFile.write(lista.toJSONString()+",");
 		}
+		writerFile.write("]");
 		writerFile.close();
 	}
 	
 	public List<Produto> listaProdutos() throws Exception {
-		FileWriter writerFile = null;
 		ProdutoDAO produtoDAO = new ProdutoDAO(con);
 		List<Produto> listaProdutos = new ArrayList<>();
 		listaProdutos.addAll(produtoDAO.listaProdutos());

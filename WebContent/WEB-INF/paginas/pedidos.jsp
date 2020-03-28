@@ -1,64 +1,63 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
  	<html>
     <head>
         <title>Pedidos | Hidro Sistemas</title>
 		<link rel="icon" href = "imagens/favicon.png">
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" href="css/easy-autocomplete.css">
+		<link rel="stylesheet" href="css/easy-autocomplete.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
         <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="bootstrap-4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/site.css">
         <link rel="stylesheet" href="css/pedidos.css">
         
     </head>
+
 <body>
 	<header class="container-fuid">
 		<nav class= "nav-user navbar navbar-default my-flex" role="navigation" id="cabecalho">
 		
-					<div class ="p-2 titulo-principal">
-						<h1>Portal de Pedidos Hidro Sistemas</h1>
-					</div>
-					
-					<div class="p-2 info-user">
-						<a href="#">${usuarioLogado.email}</a>
-					</div>
-					
-					<div class="p-2 carrinho-compras">
-						<a href="#" class="btn btn-primary btn-sm">
-							<span class="glyphicon glyphicon-shopping-cart  "></span>
-						</a>
-					</div>
-					
-					<div class="p-2" id="content">
-						<nav class="navbar navbar-expand-lg navbar-light bg-light">           
-							<button type="button" id="sidebarCollapse" class="btn btn-info btn-md btn-menu">
-								<span class="glyphicon glyphicon-th-list"></span>
-							</button>
-						</nav>
-					</div>
+			<div class ="p-2 titulo-principal">
+				<h1>Portal de Pedidos Hidro Sistemas</h1>
+			</div>
+			
+			<div class="p-2 info-user">
+				<a href="#">${usuarioLogado.email}</a>
+			</div>
+			
+<!-- 			<div class="p-2 carrinho-compras"> -->
+<!-- 				<a href="#" class="btn btn-primary btn-sm"> -->
+<!-- 					<span class="glyphicon glyphicon-shopping-cart  "></span> -->
+<!-- 				</a> -->
+<!-- 			</div> -->
+			
+			<div class="p-2" id="content">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light">           
+					<button type="button" id="sidebarCollapse" class="btn btn-info btn-md btn-menu">
+						<span class="glyphicon glyphicon-th-list"></span>
+					</button>
+				</nav>
+			</div>
+			
 		</nav>
 
 	</header>
 
-	<c:if test= "${pedidoEnviado != null}">
-		<div class="alert alert-success" role="alert" id = "alerta-sucesso">
-		<strong>${pedidoEnviado}</strong>
-		</div>
-	</c:if>
+	
 
-	<!-- Modal em caso de erro nos itens -->
+	<!-- Modal em caso de erros -->
 	<c:if test= "${itemInvalido != null }"> 
 		<div class="modal fade" tabindex="-1" role="dialog" id= "erro-itens">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Erro</h4>
+				<h4 class="modal-title waring">Erro</h4>
 			</div>
 			<div class="modal-body">
-				<p>${itemInvalido} </p>
+				<p class = "text-danger">${itemInvalido} </p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
@@ -68,7 +67,26 @@
 		</div>
 	</c:if>	
 
-	    <!-- Fim do modal de erro do item -->
+
+	<c:if test= "${falhaCadastro != null }"> 
+		<div class="modal fade" tabindex="-1" role="dialog" id= "erro-itens">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title waring">Erro</h4>
+			</div>
+			<div class="modal-body">
+				<p class = "text-danger">${falhaCadastro} </p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+			</div>
+			</div>
+		</div>
+		</div>
+	</c:if>	
+	    <!-- Fim do modal de erros-->
 		
     <div class="wrapper">
         <nav id="sidebar" class="active">
@@ -79,7 +97,7 @@
             <ul class="list-unstyled components">
                <h3><span class="glyphicon glyphicon-cog"> </span> Opções</h3>
                 <li>
-                    <a href="exec?tarefa=DigitaPedido"><span class="glyphicon glyphicon-usd"> </span> Pedido</a>
+                    <a href=exec?tarefa=Pricipal&pagina=1"><span class="glyphicon glyphicon-usd"> </span> Pedido</a>
                </li>  
                <li>
                     <a href="exec?tarefa=Perfil"><span class="glyphicon glyphicon-user"> </span> Perfil</a>
@@ -87,9 +105,11 @@
                <li>
                    <a href="exec?tarefa=Historico" class="historico-btn"><span class="glyphicon glyphicon-list-alt">  </span> Histórico</a>
                 </li>
-                <li>
-                    <a href="#"><span class="glyphicon glyphicon-barcode">   </span> Boletos</a>
-                </li>
+<!--                 <li> -->
+<!--                     <a href="#" data-toggle="tooltip" data-placement="right" title="Em breve"> -->
+<!-- 						<span class="glyphicon glyphicon-barcode">   </span> Boletos -->
+<!-- 					</a> -->
+<!--                 </li> -->
                 <li>
                     <a href="#">
                             <span class="glyphicon glyphicon-send">   </span> Contate-nos
@@ -108,7 +128,7 @@
                 <c:if test = "${usuarioLogado.admin }"> 
               	  <h3><span class="glyphicon glyphicon-pencil"> </span> Administrador</h3>
               	  <li>
-                    <a href="#">
+                    <a href="exec?tarefa=AdicionaEmpresa">
                         <span class="glyphicon glyphicon-plus">   </span> Cadastro de cliente
                     </a>
                   </li>
@@ -213,29 +233,25 @@
 											</td>
 										</tbody>
 									</table>
-								    <span id="info-ped"></span>
 									<span id="head-ped"></span>
 									<span id="itens-ped"></span>
 									<button type="submit" class="btn btn-primary btn-md " id="envia-cot">Enviar</button>
+									<img src="imagens/loading.gif" alt="carregando" id = "load">
 								</div> 
-								<div class="text-center">  
-									<img src="/imagens/transparent-background-loading.gif" alt="carregando">
-								</div>
 							</div>
 						</div>
 					</div>			    
-			</form> 
+			</form>
 	</section>
 			
 <!--FIM Modal de gera cotacao-->
-</div> <!--sidebar-->   
+	</div> <!--sidebar-->   
+
+</body>
 
     <script src="js/jquery.js"></script>
-    <script src="js/jquery.easy-autocomplete.js"></script>
+	<script src="js/jquery.easy-autocomplete.js"></script>
     <script src="js/pedidos.js"></script>
     <script src="js/main.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    
-</body>
-
 </html>

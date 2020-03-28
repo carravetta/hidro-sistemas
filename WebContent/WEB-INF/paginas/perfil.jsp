@@ -8,8 +8,9 @@
         <title>Perfil | Hidro Sistemas</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link rel="icon" href = "imagens/favicon.png">
-        <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/site.css">
+                <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+        
         <link rel="stylesheet" href="css/pedidos.css">
     </head>
  <body>
@@ -25,11 +26,11 @@
                 <a href="#">${usuarioLogado.email}</a>
             </div>
             
-            <div class="p-2 carrinho-compras">
-                <a href="#" class="btn btn-primary btn-sm">
-                    <span class="glyphicon glyphicon-shopping-cart  "></span>
-                </a>
-            </div>
+			<div class="p-2 carrinho-compras"> 
+				<a href="exec?tarefa=Carrinho" class="btn btn-info" type="button">
+				  Carrinho	 <span class="badge">${carrinho.size()}</span>
+				</a>
+			</div> 
             
             <div class="p-2" id="content">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">           
@@ -59,9 +60,9 @@
                <li>
                    <a href="exec?tarefa=Historico"><span class="glyphicon glyphicon-list-alt">  </span> Histórico</a>
                 </li>
-                <li>
-                    <a href="#"><span class="glyphicon glyphicon-barcode">   </span> Boletos</a>
-                </li>
+<!--                 <li> -->
+<!--                     <a href="#"><span class="glyphicon glyphicon-barcode">   </span> Boletos</a> -->
+<!--                 </li> -->
                 <li>
                     <a href="#">
                             <span class="glyphicon glyphicon-send">   </span> Contate-nos
@@ -80,7 +81,7 @@
                 <c:if test = "${usuarioLogado.admin }"> 
               	  <h3><span class="glyphicon glyphicon-pencil"> </span> Administrador</h3>
               	  <li>
-                    <a href="#">
+                    <a href="exec?tarefa=AdicionaEmpresa">
                         <span class="glyphicon glyphicon-plus">   </span> Cadastro de cliente
                     </a>
                  </c:if>
@@ -90,11 +91,13 @@
     <div class = "container">    
 		<h3 class = "titulo-pedidos">Perfil do Usuario </h3>
 		<aside>
-		<p>E-mail: ${usuarioLogado.email}</p>
-		<p>Empresa: ${usuarioLogado.fantasia}</p>
-		<p>CNPJ: ${usuarioLogado.cnpj_cpf}</p>
-		<p>Isnc. Estadual: ${usuarioLogado.inscEstadual}</p>
-		<p>Telefone: ${usuarioLogado.telefone}</p>		
+			<ul>
+				<li>E-mail: ${usuarioLogado.email}</li>
+				<li>Empresa: ${usuarioLogado.fantasia}</li>
+				<li>CNPJ: ${usuarioLogado.cnpj_cpf}</li>
+				<li>Isnc. Estadual: ${usuarioLogado.inscEstadual}</li>
+				<li>Telefone: ${usuarioLogado.telefone}</li>
+			</ul>			
 		</aside>
 	</div>
 
@@ -102,7 +105,6 @@
 
     <script src="js/jquery.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <script src="js/pedidos.js"></script>
     <script src="js/main.js"></script>
 </body>
 

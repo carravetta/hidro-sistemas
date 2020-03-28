@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.portal.hidrosistemas.control.Empresa;
+import br.com.portal.hidrosistemas.model.Empresa;
 
 public class EmpresaDAO {
 
